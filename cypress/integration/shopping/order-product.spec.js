@@ -54,15 +54,15 @@ describe('Order a product from store as guest customer', ()=>{
         checkoutPage.clickContinueAccountButton(); 
         
         //Billing Information
-        checkoutPage.setBillingFirstName();
-        checkoutPage.setBillingLastName();
-        checkoutPage.setBillingEmail();
-        checkoutPage.setBillingPhoneNumebr();
-        checkoutPage.setBillingAddressOne();
-        checkoutPage.setBillingCity();
-        checkoutPage.setBillingPostcode();
-        checkoutPage.selectBillingCountry();
-        checkoutPage.selectBillingState();
+        checkoutPage.setBillingFirstName("Test");
+        checkoutPage.setBillingLastName("Name");
+        checkoutPage.setBillingEmail("test@rndm.com");
+        checkoutPage.setBillingPhoneNumebr("+88132545");
+        checkoutPage.setBillingAddressOne("address1");
+        checkoutPage.setBillingCity("Newyork");
+        checkoutPage.setBillingPostcode("1212");
+        checkoutPage.selectBillingCountry("United States");
+        checkoutPage.selectBillingState("Florida");
         checkoutPage.clickContinueBillingInfoButton();
 
         //Continue Delivery Method

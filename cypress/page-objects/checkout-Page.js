@@ -8,42 +8,42 @@ export class CheckoutPage{
     cy.get('#button-account').click(); 
   }
 
-  setBillingFirstName(){
-    cy.get('#input-payment-firstname').type('Test');
+  setBillingFirstName(firstName){
+    cy.get('#input-payment-firstname').type(firstName);
 
   }
-  setBillingLastName(){
-    cy.get('#input-payment-lastname').type('Name');
+  setBillingLastName(lastName){
+    cy.get('#input-payment-lastname').type(lastName);
   }
 
-  setBillingEmail(){
-    cy.get('#input-payment-email').type('test.email@random.com');
+  setBillingEmail(email){
+    cy.get('#input-payment-email').type(email);
   }
 
-  setBillingPhoneNumebr(){
-    cy.get('#input-payment-telephone').type("+880125487");
-
-  }
-
-  setBillingAddressOne(){
-    cy.get('#input-payment-address-1').type("address1");
-  }
-
-  setBillingCity(){
-    cy.get('#input-payment-city').type("Florida");
+  setBillingPhoneNumebr(phoneNumber){
+    cy.get('#input-payment-telephone').type(phoneNumber);
 
   }
 
-  setBillingPostcode(){
-    cy.get('#input-payment-postcode').type("12345");
+  setBillingAddressOne(address1){
+    cy.get('#input-payment-address-1').type(address1);
+  }
+
+  setBillingCity(city){
+    cy.get('#input-payment-city').type(city);
 
   }
 
-  selectBillingCountry(){
-    cy.get('#input-payment-country').select('United States');
+  setBillingPostcode(postcode){
+    cy.get('#input-payment-postcode').type(postcode);
+
   }
-  selectBillingState(){
-    cy.get('#input-payment-zone').select('Florida')
+
+  selectBillingCountry(country){
+    cy.get('#input-payment-country').select(country);
+  }
+  selectBillingState(state){
+    cy.get('#input-payment-zone').select(state)
   }
 
   clickContinueBillingInfoButton(){
