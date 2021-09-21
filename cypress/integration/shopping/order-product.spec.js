@@ -1,12 +1,19 @@
 /// <reference types="cypress" />
+import {HomePage} from "../../page-objects/home-Page";
+import {SearchPage} from "../../page-objects/search-Page";
+import {CheckoutPage} from "../../page-objects/checkout-Page";      
 
 
-describe('Order a product from store', ()=>{
+describe('Order a product from store as guest customer', ()=>{
+
+    const homePage = new HomePage();
+    const searchPage = new SearchPage();
+    const checkoutPage = new CheckoutPage();
+
     it('should visit shopping page', ()=>{
-    
-    
+        
         // Vist Home Page then verify home page
-        cy.visit("https://opencart.abstracta.us/"); 
+        homePage.goHome();
         cy.location('pathname').should('eq','/'); 
         cy.title().should('eq', 'Your Store');  
     });
@@ -14,7 +21,7 @@ describe('Order a product from store', ()=>{
     it('should search a product', ()=>{
         
         //Search a Product {iPhone} then verify product search page 
-        cy.get('#search').type("iPhone{enter}"); 
+        homePage.searchProduct();
         cy.get('#content > h1').should('have.text', "Search - iPhone");
         cy.location('search').should('include', 'iPhone');
         
@@ -23,7 +30,7 @@ describe('Order a product from store', ()=>{
     it('should add a product to cart', ()=>{
         
         //Add product to cart
-        cy.contains('Add to Cart').click();
+        searchPage.addProductToCart();
         cy.get('#cart-total').should('contain','1 item(s)'); 
         
         
@@ -33,8 +40,7 @@ describe('Order a product from store', ()=>{
     it('should be able to got checkout page', ()=>{
 
         //Go to checkout page 
-        cy.get('.btn-inverse').click();
-        cy.get('a[href="https://opencart.abstracta.us:443/index.php?route=checkout/checkout"]:nth-child(2)').click();
+        searchPage.goCheckoutPage();
         cy.location('search').should('include', 'checkout/checkout')
         cy.title().should('eq', 'Checkout');
         
@@ -43,29 +49,30 @@ describe('Order a product from store', ()=>{
     
      it('should be able order as guest', ()=>{
     
-        //Customer Information
-        cy.get(':nth-child(1) > :nth-child(4) > label').click();
-        cy.get('#button-account').click(); 
-        cy.get('#input-payment-firstname').type('Test');
-        cy.get('#input-payment-lastname').type('Name');
-        cy.get('#input-payment-email').type('test.email@random.com');
-        cy.get('#input-payment-telephone').type("+880125487");
-        cy.get('#input-payment-address-1').type("address1");
-        cy.get('#input-payment-city').type("Florida");
-        cy.get('#input-payment-postcode').type("12345");
-        cy.get('#input-payment-country').select('United States')
-        cy.get('#input-payment-zone').select('Florida')
-        cy.get('#button-guest').click();
+        //Continue as Guest Customer
+        checkoutPage.clickGuestCheckout();
+        checkoutPage.clickContinueAccountButton(); 
+        
+        //Billing Information
+        checkoutPage.setBillingFirstName();
+        checkoutPage.setBillingLastName();
+        checkoutPage.setBillingEmail();
+        checkoutPage.setBillingPhoneNumebr();
+        checkoutPage.setBillingAddressOne();
+        checkoutPage.setBillingCity();
+        checkoutPage.setBillingPostcode();
+        checkoutPage.selectBillingCountry();
+        checkoutPage.selectBillingState();
+        checkoutPage.clickContinueBillingInfoButton();
+
+        //Continue Delivery Method
+        checkoutPage.continueDeliveryMethod();
     
-        //Delivery Method
-        cy.get('#button-shipping-method').click();
-    
-        //Payment Method
-        cy.get('.pull-right > [type="checkbox"]').click();
-        cy.get('#button-payment-method').click();
+        //Continue Payment Method
+        checkoutPage.continuePaymentMethod();
     
         //Confirm Order
-        cy.get('#button-confirm').click();
+        checkoutPage.confirmOrder();
         cy.get('#content > h1').should('have.text','Your order has been placed!');
     
      });
