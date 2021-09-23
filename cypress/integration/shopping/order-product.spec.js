@@ -2,28 +2,35 @@
 import {HomePage} from "../../page-objects/home-Page";
 import {SearchPage} from "../../page-objects/search-Page";
 import {CheckoutPage} from "../../page-objects/checkout-Page";      
+import { Page } from "../../page-objects/page";
+import { SuccessPage } from "../../page-objects/success-Page";
 
 
 describe('Order a product from store as guest customer', ()=>{
 
+    const page = new Page();
     const homePage = new HomePage();
     const searchPage = new SearchPage();
     const checkoutPage = new CheckoutPage();
+    const successPage = new SuccessPage();
 
     it('should visit shopping page', ()=>{
         
         // Vist Home Page then verify home page
         homePage.goHome();
-        cy.location('pathname').should('eq','/'); 
-        cy.title().should('eq', 'Your Store');  
+        page.validatePathInPageURl('/');
+        page.validatePageTitle('Your Store');
+        
     });
     
     it('should search a product', ()=>{
         
-        //Search a Product {iPhone} then verify product search page 
-        homePage.searchProduct();
-        cy.get('#content > h1').should('have.text', "Search - iPhone");
-        cy.location('search').should('include', 'iPhone');
+        //Search a Product {iPhone} then verify product search page and string 
+        homePage.searchProduct('iPhone');
+        page.validateTextInPageURl('iPhone');
+        searchPage.validateSearchText('Search - iPhone');
+        
+        
         
     });
     
@@ -31,7 +38,8 @@ describe('Order a product from store as guest customer', ()=>{
         
         //Add product to cart
         searchPage.addProductToCart();
-        cy.get('#cart-total').should('contain','1 item(s)'); 
+        searchPage.validateProductQuantityInCart();
+         
         
         
     });
@@ -41,9 +49,8 @@ describe('Order a product from store as guest customer', ()=>{
 
         //Go to checkout page 
         searchPage.goCheckoutPage();
-        cy.location('search').should('include', 'checkout/checkout')
-        cy.title().should('eq', 'Checkout');
-        
+        page.validateTextInPageURl('checkout/checkout');
+        page.validatePageTitle('Checkout');
     
     });
     
@@ -73,7 +80,8 @@ describe('Order a product from store as guest customer', ()=>{
     
         //Confirm Order
         checkoutPage.confirmOrder();
-        cy.get('#content > h1').should('have.text','Your order has been placed!');
+        successPage.validateSuccessMessage('Your order has been placed!');
+        
     
      });
 });

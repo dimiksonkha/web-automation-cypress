@@ -3,8 +3,8 @@ export class HomePage{
         cy.visit("https://opencart.abstracta.us/");  
     }
 
-    searchProduct(){
-        cy.get('#search').type("iPhone{enter}"); 
+    searchProduct(productName){
+        cy.get('#search').type(productName + "{enter}"); 
     }
 
 

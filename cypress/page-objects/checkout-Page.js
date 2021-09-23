@@ -56,7 +56,7 @@ export class CheckoutPage{
   }
 
   continuePaymentMethod(){
-    cy.get('.pull-right > [type="checkbox"]').click();
+    cy.get('.pull-right > [type="checkbox"]').check();
     cy.get('#button-payment-method').click();
   }
   confirmOrder(){
