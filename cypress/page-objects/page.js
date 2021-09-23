@@ -12,6 +12,6 @@ export class Page {
         cy.location('search').should('include', text);
     }
 
-   
-         
+
+        
 }
