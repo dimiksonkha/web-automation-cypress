@@ -13,7 +13,9 @@ describe('Login', ()=>{
     
         cy.login(email, password);
         // to prove we have a session
-        cy.getCookie('OCSESSID').should('exist')    
+        cy.getCookie('OCSESSID').should('exist');
+        
+
     
     });
     

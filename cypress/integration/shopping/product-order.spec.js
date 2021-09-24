@@ -12,11 +12,7 @@
     const successPage = new SuccessPage();
 
     describe('Order a product from store as guest customer', ()=>{
-        before(()=>{
-            cy.clearCookie('OCSESSID');
-
-        });
-
+    
         it('should visit shopping page', ()=>{
             
             // Vist Home Page then verify home page
@@ -99,7 +95,7 @@
 
         after(()=>{
             cy.clearCookie('OCSESSID');
-
+        
         });
 
     
@@ -151,13 +147,13 @@
             // checkoutPage.setBillingPostcode("1212");
             // checkoutPage.selectBillingCountry("United States");
             // checkoutPage.selectBillingState("Florida");
-            checkoutPage.clickContinueBillingInfoButton();
+            checkoutPage.clickContinueBillingInfoButtonAsRegisterdCustomer();
 
             //Continue Delivery Method
             checkoutPage.continueDeliveryMethod();
         
             //Continue Payment Method
-            checkoutPage.continuePaymentMethod();
+            checkoutPage.continuePaymentMethodAsRegisterCustomer();
         
             //Confirm Order
             checkoutPage.confirmOrder();

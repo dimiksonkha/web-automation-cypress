@@ -46,18 +46,18 @@
       cy.get('#input-payment-zone').select(state)
     }
 
-    clickContinueBillingInfoButton(){
-        if(cy.getCookie('OCSESSID').should('exist')){
-          cy.get('#button-payment-address').click();
-         this.continueShippingInformation();
-          
-
-        }else{
-          cy.get('#button-guest').click(); 
-        }
+    clickContinueBillingInfoButtonAsRegisterdCustomer(){
         
+          cy.get('#button-payment-address').click();
+          this.continueShippingInformation();
+              
         
     }
+    clickContinueBillingInfoButton(){
+     
+        cy.get('#button-guest').click(); 
+            
+  }
     continueShippingInformation(){
       cy.get('#button-shipping-address').click();
 
@@ -70,10 +70,16 @@
         
     }
 
-    continuePaymentMethod(){
+    continuePaymentMethodAsRegisterCustomer(){
       cy.get('[type="checkbox"]').check();
       cy.get('#button-payment-method').click();
     }
+
+    continuePaymentMethod(){
+      cy.get('.pull-right [type="checkbox"]').check();
+      cy.get('#button-payment-method').click();
+    }
+
     confirmOrder(){
       cy.get('#button-confirm').click();
     }
