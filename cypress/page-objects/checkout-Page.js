@@ -47,16 +47,31 @@
     }
 
     clickContinueBillingInfoButton(){
+        if(cy.getCookie('OCSESSID').should('exist')){
+          cy.get('#button-payment-address').click();
+         this.continueShippingInformation();
+          
+
+        }else{
+          cy.get('#button-guest').click(); 
+        }
         
-        cy.get('#button-guest').click();
+        
+    }
+    continueShippingInformation(){
+      cy.get('#button-shipping-address').click();
+
     }
 
     continueDeliveryMethod(){
-        cy.get('#button-shipping-method').click();
+      
+        
+          cy.get('#button-shipping-method').click();  
+        
     }
 
     continuePaymentMethod(){
-      cy.get('.pull-right > [type="checkbox"]').check();
+      cy.get('[type="checkbox"]').check();
       cy.get('#button-payment-method').click();
     }
     confirmOrder(){

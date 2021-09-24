@@ -8,6 +8,10 @@ export class Page {
         cy.visit('/index.php?route=account/register');
     }
 
+    visitLoginPage(){
+        cy.visit('/index.php?route=account/login');
+    }
+
     validatePathInPageURl(path){
         cy.location('pathname').should('eq', path); 
     }
