@@ -1,6 +1,6 @@
 export class HomePage{
-    goHome(){
-        cy.visit("https://opencart.abstracta.us/");  
+    visitHome(){
+        cy.visit("/");  
     }
 
     searchProduct(productName){

@@ -17,7 +17,7 @@
         it('should visit shopping page', ()=>{
             
             // Vist Home Page then verify home page
-            homePage.goHome();
+            page.visitHome();
             page.validatePathInPageURl('/');
             page.validatePageTitle('Your Store');
             

@@ -1,4 +1,6 @@
 {
     "chromeWebSecurity": false,
-    "watchForFileChanges":false
+    "watchForFileChanges":true,
+    "baseUrl":"https://opencart.abstracta.us"
+
   }

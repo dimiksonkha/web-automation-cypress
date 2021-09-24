@@ -1,5 +1,13 @@
 export class Page {
 
+    visitHome(){
+        cy.visit("/");  
+    }
+
+    visitRegistrationPage(){
+        cy.visit('/index.php?route=account/register');
+    }
+
     validatePathInPageURl(path){
         cy.location('pathname').should('eq', path); 
     }
