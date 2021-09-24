@@ -18,15 +18,23 @@ describe('Shopping user registration',()=>{
 
     });
 
-    it('should register a new custoemr account', ()=>{
+    it('should register and login', ()=>{
+        const email = generateRandomEmail();
+        const password = "12345";
+
         registrationPage.setFirstName("Test");
         registrationPage.setLastName("User");
-        registrationPage.setEmail(generateRandomEmail());
+        registrationPage.setEmail(email);
         registrationPage.setTelephoneNumber("+8801010101010");
-        registrationPage.setPassword("12345");
+        registrationPage.setPassword(password);
         registrationPage.agreePrivacyPolicy();
         registrationPage.continueRegistration(); 
         registrationPage.validateSuccessMessage("You will be notified by e-mail once your account has been activated by the store owner.");
+       
+        cy.clearCookie("OCSESSID");
+        
+        cy.login(email, password);
+        
 
     });
 });

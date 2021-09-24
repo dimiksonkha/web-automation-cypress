@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (email, password) => {
+
+    cy.request({
+        method: 'POST',
+        url: '/index.php?route=account/login', // baseUrl is prepended to url
+        form: true, // indicates the body should be form urlencoded and sets Content-Type: application/x-www-form-urlencoded headers
+        body: {
+          email: email,
+          password: password,
+        },
+      })
+
+ })
